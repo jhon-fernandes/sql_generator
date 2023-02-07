@@ -3,6 +3,7 @@
 <p> O objetivo do desenvolvimento desse projeto é facilitar a inserção de dados em uma base de dados SQL a partir de 
 um arquivo CSV (EXEL), foi utilizado o PHP como linguagem para o desenvolvimento.</p>
 
+<p> Link para deploy: https://jonasfernandes.000webhostapp.com/sql_generator/ </p>
 <p> Linguagens e Tecnologias Utilizadas: </p>
 <ul>
     <li> HTML </li>
