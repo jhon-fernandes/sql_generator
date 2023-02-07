@@ -24,6 +24,7 @@
                         <strong> Tabela: </strong> 
                     </label>
                     <input type="text" class="form-control in" name="nameTable">
+
                     <button type="submit" class="btn btn-primary btn-enviar"> 
                         <span class="btn-enviar-txt"> Enviar </span>
                         </button>
@@ -39,8 +40,6 @@
                         e.preventDefault();                   // EVITA DE CARREGAR
                         var form = $('form')[0];              // CAPTURA ELEMENTOS DO FORMULÁRIO
                         var formData = new FormData(form);    // CRIA O ELEMENTO
-
-                        //$(".result").fadeOut(1000);
 
                         $.ajax({
                             url: 'generator.php',

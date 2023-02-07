@@ -4,25 +4,6 @@ $nameTable = $_POST['nameTable'];
 $fileTmpName = $_FILES['file']['tmp_name'];       // PEGA O LOCAL DO ARQUIVO
 $fileType = $_FILES['file']['type'];             // PEGA A EXTENSÃO DO ARQUIVO
 
-// $seq = "123,456,789";
-// $seq = explode(',', $seq);
-
-// var_dump($seq);
-
-// $texto = 1234;
-// $aux = str_split($texto);
-// $texto = implode("','",$aux);
-// var_dump($texto);
-
-// $myNumbers = "123,456,778";
-// $myNumbersExploded = explode(",", $myNumbers);
-// $myNumbersWithNewCaracter = array_map(function($v){ return "'".$v."'"; }, $myNumbersExploded);
-// $myNumbers = implode(",", $myNumbersWithNewCaracter);
-
-// $number = "1,2,3,4,5";
-// $numberExplode = explode(",",$number);
-// echo$numberExplode;
-
 if(!empty($nameTable))
 {
    
@@ -42,14 +23,19 @@ if(file_exists($fileTmpName))                   // VERIFICA SE O ARQUIVO EXISTE
         
         echo "<p class='alert alert-success'> Upload realizado com sucesso! </p>";
 
+       
         foreach($csvsKey as $keys)
         {
             foreach($csv as $key=>$value)
             {
-                $numberExplode = explode(",",$value);
-                echo "INSERT INTO $nameTable (id, $keys) VALUES ($key, $value);"."<br>";
+                $myNumbersExploded = explode(",", $value);
+                $myNumbersWithNewCaracter = array_map(function($v){ return "'".$v."'"; }, $myNumbersExploded);
+                $myNumbers = implode(",", $myNumbersWithNewCaracter);
+                echo "INSERT INTO $nameTable (id, $keys) VALUES ($key, $myNumbers);"."<br>";
             }
         }
+        
+        
 
     }   else 
     {
