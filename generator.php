@@ -4,6 +4,16 @@ $nameTable = $_POST['nameTable'];
 $fileTmpName = $_FILES['file']['tmp_name'];       // PEGA O LOCAL DO ARQUIVO
 $fileType = $_FILES['file']['type'];             // PEGA A EXTENSÃO DO ARQUIVO
 
+$columRow = $_POST['cl'];
+
+if(!empty($columRow))
+{
+}   else 
+{
+    echo "<p class='alert alert-danger'> Selecione o número de campos de acordo com sua tabela </p>";
+    return false;
+}   
+
 if(!empty($nameTable))
 {
    
@@ -23,19 +33,50 @@ if(file_exists($fileTmpName))                   // VERIFICA SE O ARQUIVO EXISTE
         
         echo "<p class='alert alert-success'> Upload realizado com sucesso! </p>";
 
-       
-        foreach($csvsKey as $keys)
+        $lineOne = 0;
+        if($columRow == 1)
         {
+            foreach ( $csvsKey as $keys ) 
+            {
+                foreach($csv as $key=>$value)
+                {
+                    $myNumbersExploded = explode(",", $value);
+                    $myNumbersWithNewCaracter = array_map(function($v){ return "'".$v."'"; }, $myNumbersExploded);
+                    $myNumbers = implode(",", $myNumbersWithNewCaracter);
+                    echo "INSERT INTO $nameTable (id, $keys) VALUES ($key, $myNumbers);"."<br>";
+                    if (++$lineOne == 1) break;
+                }
+                
+            }
+        }
+
+        if($columRow == 2)
+        {
+            $keys = implode(",", $csvsKey);          // CONVERTE ARRAY EM STRING
+            echo "INSERT INTO $nameTable( id, $keys ) VALUES"."<br>";
+
             foreach($csv as $key=>$value)
             {
                 $myNumbersExploded = explode(",", $value);
                 $myNumbersWithNewCaracter = array_map(function($v){ return "'".$v."'"; }, $myNumbersExploded);
                 $myNumbers = implode(",", $myNumbersWithNewCaracter);
-                echo "INSERT INTO $nameTable (id, $keys) VALUES ($key, $myNumbers);"."<br>";
+                echo "($key, $myNumbers),"."<br>";
             }
         }
-        
-        
+
+        if($columRow == 3)
+        {
+             foreach($csvsKey as $keys)
+            {
+                foreach($csv as $key=>$value)
+                {
+                    $myNumbersExploded = explode(",", $value);
+                    $myNumbersWithNewCaracter = array_map(function($v){ return "'".$v."'"; }, $myNumbersExploded);
+                    $myNumbers = implode(",", $myNumbersWithNewCaracter);
+                    echo "INSERT INTO $nameTable (id, $keys) VALUES ($key, $myNumbers);"."<br>";
+                }
+            }
+        }
 
     }   else 
     {

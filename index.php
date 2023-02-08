@@ -14,6 +14,13 @@
             <div class="col-12">
                 <h1> Gerador CSV para Dump SQL </h1>
                 <hr>
+                <strong> Forma de usar: </strong>
+                <ul>
+                    <li> Se seu arquivo possue um cabeçalho e uma linha selecione a primeira opção. </li>
+                    <li> Se seu arquivo possue um cabeçalho e mais de uma linha selecione a segunda opção. </li>
+                    <li> Caso queira apenas ver os códigos SQL selecione a terceira opção. </li>
+                </ul>
+               <span> OBS: Ao selecionar a segunda opção a última linha no final a vírgula deverá ser substituída por ; </span>
                 <form id="formUpload" method="post" enctype="multipart/form-data" class="form">
                     <label> 
                         <strong> Arquivo: </strong> 
@@ -24,7 +31,18 @@
                         <strong> Tabela: </strong> 
                     </label>
                     <input type="text" class="form-control in" name="nameTable">
-
+                    <br>
+                    <label> 
+                        <strong> Selecione de acordo com seu arquivo: </strong> 
+                    </label>
+                    <br>
+                    <select name="cl" class="form-control">
+                        <option hidden value=""> </option>
+                        <option value="1"> 1 Coluna (Cabeçalho) e 1 Linha </option>
+                        <option value="2"> 1 Coluna (Cabeçalho) e + de 1 Linha </option>
+                        <option value="3"> Deseja com vários inserts ? </option>
+                    </select>
+                    <br>
                     <button type="submit" class="btn btn-primary btn-enviar"> 
                         <span class="btn-enviar-txt"> Enviar </span>
                         </button>
